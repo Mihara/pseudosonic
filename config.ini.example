@@ -1,0 +1,21 @@
+
+[pseudosonic]
+# Server parameters
+url: https://example.com
+# Use when your port is not standard.
+port: 443
+# You can comment this out if your Subsonic API is available at server root.
+server_path: /navidrome/
+# Obvious.
+username: mihara
+password: whatever
+# Where the resulting files go.
+music_dir: /home/mihara/Sync/Converted_Music
+
+# By default, favorites are synchronized. To synchronize a specific
+# playlist instead, put the name of the playlist in this variable.
+#playlist: foo
+
+# Format you want them in. The server must be set up to convert to this format.
+format: mp3
+bitrate: 128
