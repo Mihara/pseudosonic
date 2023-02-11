@@ -14,6 +14,7 @@ password: whatever
 # Named sections describe a download batch operation.
 # You can have multiple. If you don't give one on the command line,
 # all of them will be executed.
+
 [headphones]
 # Where the resulting files go.
 music_dir: /home/mihara/Sync/Converted_Music
@@ -22,6 +23,20 @@ music_dir: /home/mihara/Sync/Converted_Music
 # playlist instead, put the name of the playlist in this variable.
 #playlist: foo
 
+# Whether to download cover art. Defaults to no.
+# When you're producing mp3 files this is unnecessary, since
+# ffmpeg will embed cover art during transcoding.
+# This is unfortunately not true if you wish to convert to opus,
+# due to a long-standing deficiency in ffmpeg.
+# The actual file format of the cover art is ignored.
+
+coverart: yes
+# The default. Inherited from SERVER section.
+coverart_size: 512
+# The default. Inherited from SERVER section.
+coverart_file: cover.jpg
+
 # Format you want them in. The server must be set up to convert to this format.
+# These two parameters are inherited from SERVER section.
 format: mp3
 bitrate: 128

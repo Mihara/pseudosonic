@@ -132,6 +132,20 @@ def get_songs(songlist, profile):
         with open(filename, "wb") as f:
             f.write(filedata.read())
 
+        # Deal with cover art.
+        if profile.getboolean("coverart"):
+            cover_file = os.path.join(
+                filepath,
+                profile.get("coverart_file", server.get("coverart_file", "cover.jpg")),
+            )
+            if not pathlib.Path(cover_file).exists():
+                request = conn.getCoverArt(
+                    song["id"],
+                    size=profile.get("coverart_size", server.get("coverart_size", 512)),
+                )
+                with open(cover_file, "wb") as f:
+                    f.write(request.read())
+
 
 for section in cfg.sections():
     if section == "SERVER":
