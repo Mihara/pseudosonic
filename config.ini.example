@@ -1,5 +1,6 @@
 
-[pseudosonic]
+# Server parameters go here.
+[SERVER]
 # Server parameters
 url: https://example.com
 # Use when your port is not standard.
@@ -9,6 +10,11 @@ server_path: /navidrome/
 # Obvious.
 username: mihara
 password: whatever
+
+# Named sections describe a download batch operation.
+# You can have multiple. If you don't give one on the command line,
+# all of them will be executed.
+[headphones]
 # Where the resulting files go.
 music_dir: /home/mihara/Sync/Converted_Music
 
