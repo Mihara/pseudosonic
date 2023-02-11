@@ -53,6 +53,9 @@ conn = libsonic.Connection(
 
 conn.ping()
 
+# This will only get filled once.
+album_data = dict()
+
 
 def grab_song(songrec):
     "Grab a single song..."
@@ -63,6 +66,10 @@ def grab_song(songrec):
 def grab_album(albumrec):
     "Acquire every song of an album..."
     for album in albumrec:
+        
+        # Save album data for later.
+        album_data[album["id"]] = album
+        
         album_songs = conn.getAlbum(album["id"])
         grab_song(album_songs["album"]["song"])
 
@@ -102,6 +109,13 @@ def grab_profile(profile):
                 grab_song(playlist_data["playlist"]["entry"])
 
 
+def update_album_data(songlist):
+    "Fetch the album information for albums we haven't done so for yet."
+    for song in songlist.values():
+        if not album_data.get(song["albumId"]):
+            album_data[song["albumId"]] = conn.getAlbum(song["albumId"]).get("album")
+
+
 def get_songs(songlist, profile):
 
     # Now that we have a list, go through it, streaming every song into a file,
@@ -110,9 +124,16 @@ def get_songs(songlist, profile):
     file_format = profile.get("format", server.get("format", "mp3"))
 
     for song in songlist.values():
+
+        # If the song is part of an album, the artist part of the directory is
+        # the album artist, rather than the song artist.
+        # This prevents scattering an album or compilation.
+        # Fetching the album details takes a substantial amount of extra time though.
+        
+        artist_name = album_data[song["albumId"]].get("artist") or song["artist"]
         filepath = os.path.join(
             profile.get("music_dir", server.get("music_dir", ".")),
-            FILE_LEGAL.sub("_", song["artist"]),
+            FILE_LEGAL.sub("_", artist_name),
             FILE_LEGAL.sub("_", song["album"]),
         )
         pathlib.Path(filepath).mkdir(parents=True, exist_ok=True)
@@ -123,10 +144,10 @@ def get_songs(songlist, profile):
             + "."
             + file_format,
         )
-        
+
         if not profile.getboolean("overwrite") and pathlib.Path(filename).exists():
             continue
-        
+
         filedata = conn.stream(
             song["id"],
             tformat=file_format,
@@ -166,4 +187,5 @@ for section in cfg.sections():
     songlist = dict()
 
     grab_profile(profile)
+    update_album_data(songlist)
     get_songs(songlist, profile)
