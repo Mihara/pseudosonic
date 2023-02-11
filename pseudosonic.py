@@ -150,7 +150,7 @@ def get_songs(songlist, profile):
 for section in cfg.sections():
     if section == "SERVER":
         continue
-    if len(args.profile) and section not in args.profile:
+    if args.profile and section not in args.profile:
         continue
 
     profile = cfg[section]
