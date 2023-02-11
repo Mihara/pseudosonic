@@ -118,7 +118,7 @@ def get_songs(songlist, profile):
         pathlib.Path(filepath).mkdir(parents=True, exist_ok=True)
         filename = os.path.join(
             filepath,
-            ("{:02} - ".format(song["track"]) if song["track"] else "")
+            ("{:02} - ".format(song["track"]) if song.get("track") else "")
             + FILE_LEGAL.sub("_", song["title"])
             + "."
             + file_format,
