@@ -123,6 +123,10 @@ def get_songs(songlist, profile):
             + "."
             + file_format,
         )
+        
+        if not profile.getboolean("overwrite") and pathlib.Path(filename).exists():
+            continue
+        
         filedata = conn.stream(
             song["id"],
             tformat=file_format,

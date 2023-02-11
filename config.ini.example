@@ -23,6 +23,10 @@ music_dir: /home/mihara/Sync/Converted_Music
 # playlist instead, put the name of the playlist in this variable.
 #playlist: foo
 
+# Overwrite a file if a downloaded one already exists.
+# Defaults to no -- in which case the file is skipped.
+#overwrite: yes
+
 # Whether to download cover art. Defaults to no.
 # When you're producing mp3 files this is unnecessary, since
 # ffmpeg will embed cover art during transcoding.
