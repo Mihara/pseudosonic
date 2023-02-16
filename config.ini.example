@@ -19,6 +19,9 @@ password: whatever
 # Where the resulting files go.
 music_dir: /home/mihara/Sync/Converted_Music
 
+# If this operation is not meant to happen by default, uncomment this.
+#default: no
+
 # By default, favorites are synchronized. To synchronize a specific
 # playlist instead, put the name of the playlist in this variable.
 #playlist: foo

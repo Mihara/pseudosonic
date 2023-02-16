@@ -179,6 +179,9 @@ for section in cfg.sections():
         continue
 
     profile = cfg[section]
+    
+    if not args.profile and not profile.getboolean('default', True):
+        continue
 
     print("Profile:", section)
 
