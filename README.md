@@ -1,3 +1,9 @@
+# WARNING: This script is considered obsolete
+
+Do whatever you want with it, but I won't be touching it again.
+
+If you're actually using this, I recommend you use [pseudosonic-go](https://github.com/mihara/pseudosonic-go) instead, it's much much better.
+
 # Pseudosonic
 
 Imagine you have a [Navidrome](https://www.navidrome.org/) server *(or another Subsonic API server capable of transcoding)* and a cheap MP3 player, not capable of running a Subsonic client or playing half the formats your music collection is stored in, which you need to synchronize a substantial subset of your music library onto. Or, you don't like the available Subsonic clients for your phone and wish to just make an offline copy of your library, compressed down for your phone.
